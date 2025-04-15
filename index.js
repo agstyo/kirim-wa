@@ -31,9 +31,13 @@ client.on('qr', async (qr) => {
     }
 });
 
-
 client.on('ready', () => {
     console.log('WhatsApp Client is ready!');
+});
+
+
+app.get('/health-check', (req, res) => {
+    res.status(200).json({ status: 'OK', message: 'API WhatsApp aktif dan berjalan dengan baik' });
 });
 
 app.get('/qr', (req, res) => {
