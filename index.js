@@ -3,6 +3,8 @@ const qrcode = require('qrcode-terminal');
 //const qrcode = require('qrcode');  // Hanya perlu satu import qrcode
 const express = require('express');
 const bodyParser = require('body-parser');
+const fs = require('fs');
+
 const app = express();
 const port = 3030;
 
@@ -18,13 +20,20 @@ const client = new Client({
       }
 });
 
-
-// Event QR - Untuk terminal
-client.on('qr', (qr) => {
+client.on('qr', async (qr) => {
     console.log('\n==============================');
     console.log('🔐 QR Code terdeteksi, silakan scan dengan WhatsApp!');
     console.log('==============================\n');
     qrcode.generate(qr, { small: true });
+
+    // Generate base64
+    qrCodeImage = await qrcode.toDataURL(qr);
+    console.log('📸 Base64 QR code:', qrCodeImage); // opsional, atau disimpan aja
+
+    // Kalau mau disimpan jadi file:
+    // const fs = require('fs');
+    // const base64Data = qrCodeImage.split(',')[1];
+    // fs.writeFileSync('qr.png', base64Data, 'base64');
 });
 
 // Event QR - Untuk web, diubah menjadi base64
