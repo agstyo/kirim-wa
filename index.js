@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 
 const app = express();
-const port = 3030;
+const port = process.env.PORT || 3030;
 
 let qrCodeImage = null;
 
