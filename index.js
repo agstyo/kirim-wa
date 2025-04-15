@@ -25,6 +25,7 @@ client.on('qr', async (qr) => {
     try {
         qrCodeImage = await QRCode.toDataURL(qr);
         console.log('QR base64 berhasil dibuat!');
+        console.log(qrCodeImage);
     } catch (err) {
         console.error('Gagal generate QR base64:', err);
     }
